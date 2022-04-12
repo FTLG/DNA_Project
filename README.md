@@ -1,30 +1,5 @@
 # DNA_Project
 
-Table of Contents
-
-Table of Contents	2
-Section 1 - Cerebration Sessions - Brainstorming and Initial Design	3
-Identified Unmet Needs	3
-Thought Questions	4
-Resource Availability and Restrictions	5
-Identifying Risks and Alternatives	5
-Discussion and Debate	6
-Opportunities for Proof of Concept	7
-Section 2 - Key Terms and Definitions	7
-Section 3 - Project Introduction Statement	8
-Section 4 - Design Considerations	8
-Assumptions	8
-Project Requirements	8
-Specifications	8
-Initial Risks and Alternatives	8
-Artifacts	9
-Section 5 - Implementation of Data Structures Course Concepts	10
-Section 6 - Goals and Timeline	11
-
-
-
-
-
 Section 1 - Cerebration Sessions - Brainstorming and Initial Design
 
 Identified Unmet Needs
