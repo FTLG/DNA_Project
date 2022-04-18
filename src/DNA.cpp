@@ -6,3 +6,13 @@
  * File Contents: This file contains the function definitions for the Final Project
  **********************************/
 
+#include "../include/DNA.h"
+
+void read_from_file(IFSTREAM& DNA_infile)
+{
+    std::string in_string;
+
+    while (DNA_infile >> in_string){
+        COUT << in_string;
+    }
+}
