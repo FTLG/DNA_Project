@@ -1,8 +1,8 @@
-# Author: Felixander Kery
-# E-mail: fkery@nd.edu
-# Date: 4/1/22
+# Author: Felixander Kery, George Perry, Max Mullen, Duncan Park
+# E-mail: fkery@nd.edu, gperry@nd.edu, dpark6@nd.edu, mmullen5@nd.edu
+# Date: 4/18/22
 #
-# This is the Makefile for Programming Challenge 07
+# This is the Makefile for the Final Project
 
 # g++ is for the GCC compiler for C++
 CC := g++
@@ -27,16 +27,16 @@ initialize:
 # Run Compilation Command
 # Command: make PC07
 
-$(OBJ)/passcode.o: $(SRC)/passcode.cpp
-	$(CC) $(CXXFLAGS) -c $(SRC)/passcode.cpp -o $@
-	
-$(OBJ)/PC07.o: $(SRC)/PC07.cpp
-	$(CC) $(CXXFLAGS) -c $(SRC)/PC07.cpp -o $@
+$(OBJ)/DNA.o: $(SRC)/DNA.cpp
+	$(CC) $(CXXFLAGS) -c $(SRC)/DNA.cpp -o $@
 
-PC07Objs :=  $(OBJ)/PC07.o $(OBJ)/passcode.o
+$(OBJ)/main.o: $(SRC)/main.cpp
+	$(CC) $(CXXFLAGS) -c $(SRC)/main.cpp -o $@
 
-PC07: $(initialize) $(PC07Objs)
-	$(CC) $(CXXFLAGS) -o $(EXE)/PC07 $(PC07Objs)
+mainObjs :=  $(OBJ)/main.o $(OBJ)/DNA.o
+
+main: $(initialize) $(mainObjs)
+	$(CC) $(CXXFLAGS) -o $(EXE)/main $(mainObjs)
 	
 
 # Make clean
