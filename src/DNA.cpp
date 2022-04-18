@@ -10,9 +10,20 @@
 
 void read_from_file(IFSTREAM& DNA_infile)
 {
-    std::string in_string;
+    STRING in_string;
 
     while (DNA_infile >> in_string){
-        COUT << in_string;
+        continue;
     }
+
+    //COUT << in_string << ENDL;
+
+    const size_t bitsetSize = 2 * in_string.length();
+    DNA_BS sequence(in_string, bitsetSize/2);
+
+    char* out_string = sequence.to_string();
+
+    COUT << out_string << ENDL;
+    
 }
+
