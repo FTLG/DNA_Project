@@ -8,6 +8,7 @@
 
 #include "../include/DNA.h"
 
+
 void read_from_file(IFSTREAM& DNA_infile)
 {
     STRING in_string;
