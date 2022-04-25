@@ -6,13 +6,16 @@
  * File Contents: This file contains the function declarations for the Final Project
  **********************************/
 
+#ifndef __DNA_H__
+#define __DNA_H__
+
 #include <iostream>
 #include <vector>
 #include <bitset>
 #include <cassert>
 #include <fstream>
 #include <cstring> 
-#include <stdexcept> 
+#include <stdexcept>
 
 #define VECTOR std::vector
 #define CIN std::cin
@@ -58,21 +61,21 @@ public:
         /* for each base of the DNA sequence */
         for (size_t i = 0; i < dna_len; ++i)
         {
-            uint8_t shift = 6 - 2 * (i % 4);
+            uint8_t shift = (uint8_t) (6 - 2 * (i % 4));
  
             switch (dna_str[i])
             {
                 case 'A':
-                    m_data[i / 4] |= BASE_A << shift;
+                    m_data[i / 4] |= (uint8_t) (BASE_A << shift);
                     break;
                 case 'C':
-                    m_data[i / 4] |= BASE_C << shift;
+                    m_data[i / 4] |= (uint8_t) (BASE_C << shift);
                     break;
                 case 'G':
-                    m_data[i / 4] |= BASE_G << shift;
+                    m_data[i / 4] |= (uint8_t) (BASE_G << shift);
                     break;
                 case 'T':
-                    m_data[i / 4] |= BASE_T << shift;
+                    m_data[i / 4] |= (uint8_t) (BASE_T << shift);
                     break;
                 case '\0':
                     break;
@@ -83,7 +86,7 @@ public:
                     throw std::invalid_argument("Invalid DNA base");
             }
  
-            shift = (shift == 0) ? 6 : shift - 2;
+            shift = (shift == 0) ? 6 : (uint8_t) (shift - 2);
         }
     }
  
@@ -105,11 +108,11 @@ public:
         /* for each base of the DNA sequence */
         for (size_t i = 0; i < m_len; ++i)
         {
-            uint8_t shift = 6 - 2 * (i % 4);
-            uint8_t mask = BASE_MASK << shift;
+            uint8_t shift = (uint8_t) (6 - 2 * (i % 4));
+            uint8_t mask = (uint8_t) (BASE_MASK << shift);
  
             /* get the i-th DNA base */
-            uint8_t base = (m_data[i / 4] & mask) >> shift;
+            uint8_t base = (uint8_t) ((m_data[i / 4] & mask) >> shift);
  
             switch (base)
             {
@@ -138,3 +141,5 @@ private:
     uint8_t* m_data;
     size_t m_len;
 };
+
+#endif

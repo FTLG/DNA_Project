@@ -25,7 +25,7 @@ int main( const int argc, const char* argv [] )
     // }
 
     int argind = 1;
-    char *filename = (char *) "src/ex1.txt"; // Set Default File Path
+    char *filename = (char *) "tests/ex1.txt"; // Set Default File Path
 
      while (argind < argc && strlen(argv[argind]) > 1 && argv[argind][0] == '-') {
         char *arg = (char *) argv[argind++];
@@ -35,7 +35,7 @@ int main( const int argc, const char* argv [] )
                 usage(0);
                 break;
             case 'f':
-                filename = (char *) (argv[argind]);
+                filename = (char *) (argv[argind]); // save filename
                 break;
             default:
                 usage(1);
@@ -43,9 +43,9 @@ int main( const int argc, const char* argv [] )
         }
      }
 
-     IFSTREAM DNA_infile (filename);
+     IFSTREAM DNA_infile (filename); // save file data
 
-     read_from_file(DNA_infile);
+     read_from_file(DNA_infile); 
 
 
 }
