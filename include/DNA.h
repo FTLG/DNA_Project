@@ -38,8 +38,9 @@ enum
 
 
 void read_from_file(IFSTREAM& DNA_infile);
+char get_choice();
 
-class DNA_BS
+class DNA_MS
 {
 public:
     /**
@@ -47,7 +48,7 @@ public:
      * @param dna_str A string holding a DNA sequence (e.g. "ATGCACG").
      * @param dna_len The length of the DNA sequence.
      */
-    DNA_BS(STRING dna_str, const size_t dna_len)
+    DNA_MS(STRING dna_str, const size_t dna_len)
     {
         m_len = dna_len;
  
@@ -93,7 +94,7 @@ public:
     /**
      * @brief Destructor.
      */
-    ~DNA_BS()
+    ~DNA_MS()
     {
         delete[] m_data;
     }
