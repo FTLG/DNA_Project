@@ -7,6 +7,7 @@
  **********************************/
 
 #include "../include/DNA.h"
+#include "../src/BM_Algo.cpp"
 
 
 void read_from_file(IFSTREAM& DNA_infile)
@@ -17,14 +18,16 @@ void read_from_file(IFSTREAM& DNA_infile)
         continue;
     }
 
-    //COUT << in_string << ENDL;
-
     const size_t bitsetSize = 2 * in_string.length();
     DNA_BS sequence(in_string, bitsetSize/2);
 
     char* out_string = sequence.to_string();
 
     COUT << out_string << ENDL;
-    
+
+    search(out_string, (char *) "TAC"); // TAC = pattern to search for
+
+    COUT << ENDL;
+
 }
 
