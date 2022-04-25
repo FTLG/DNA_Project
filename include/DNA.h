@@ -16,6 +16,8 @@
 #include <fstream>
 #include <cstring> 
 #include <stdexcept>
+# include <limits.h>
+# include <string.h>
 
 #define VECTOR std::vector
 #define CIN std::cin
@@ -27,6 +29,7 @@
 #define MEMSET std::memset
 
 #define BASE_MASK 0x3 /* binary: 11 */
+# define NO_OF_CHARS 256
 
 enum
 {
@@ -37,18 +40,25 @@ enum
 };
 
 
-void read_from_file(IFSTREAM& DNA_infile);
+STRING read_from_file(IFSTREAM& DNA_infile);
 char get_choice();
+int max(int a, int b);
+void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
+int search(char *txt, char *pat);
 
-class DNA_MS
+class DNA_BS
 {
 public:
+
+    // Default Constructor
+    DNA_BS(): m_data(), m_len() {}
+
     /**
      * @brief Constructs a compressed representation of a DNA sequence.
      * @param dna_str A string holding a DNA sequence (e.g. "ATGCACG").
      * @param dna_len The length of the DNA sequence.
      */
-    DNA_MS(STRING dna_str, const size_t dna_len)
+    DNA_BS(STRING dna_str, const size_t dna_len)
     {
         m_len = dna_len;
  
@@ -94,9 +104,10 @@ public:
     /**
      * @brief Destructor.
      */
-    ~DNA_MS()
+    ~DNA_BS()
     {
         delete[] m_data;
+        
     }
  
     /**
@@ -105,7 +116,7 @@ public:
     char* to_string() const
     {
         char* dna_str = new char[m_len + 1];
- 
+
         /* for each base of the DNA sequence */
         for (size_t i = 0; i < m_len; ++i)
         {
