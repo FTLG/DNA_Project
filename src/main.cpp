@@ -35,17 +35,21 @@ int main( const int argc, const char* argv [] )
         }
     }
 
-    
-
     IFSTREAM DNA_infile (filename); // save file data
 
-    read_from_file(DNA_infile); 
+    STRING dna = read_from_file(DNA_infile);
+    const size_t size = dna.length();
+
+    DNA_BS strand(dna, size);
+    char* DNA_string = strand.to_string();
+
+    search(DNA_string, (char *) "TAC");
+
+    //delete(DNA_string);
 
     char choice = get_choice();
 
+
     //if (choice == 'h') huntington_search() ..
-
-    
-
 
 }
