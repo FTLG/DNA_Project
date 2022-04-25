@@ -19,15 +19,28 @@ void read_from_file(IFSTREAM& DNA_infile)
     }
 
     const size_t bitsetSize = 2 * in_string.length();
-    DNA_BS sequence(in_string, bitsetSize/2);
+    DNA_MS sequence(in_string, bitsetSize/2);
 
     char* out_string = sequence.to_string();
 
     COUT << out_string << ENDL;
 
-    search(out_string, (char *) "TAC"); // TAC = pattern to search for
+    int x = search(out_string, (char *) "TAC"); // TAC = pattern to search for
 
-    COUT << ENDL;
+
+    COUT << ENDL << x << ENDL;
 
 }
 
+char get_choice()
+{
+    COUT << "What would you like to search for: " << ENDL 
+    << "h: Huntington's Disease Gene" << ENDL
+    << "o: Other motif" << ENDL;
+
+    char choice;
+
+    CIN >> choice;
+
+    return choice;
+}
