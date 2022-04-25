@@ -16,8 +16,9 @@
 #include <fstream>
 #include <cstring> 
 #include <stdexcept>
-# include <limits.h>
-# include <string.h>
+#include <limits.h>
+#include <string.h>
+#include <ctype.h>
 
 #define VECTOR std::vector
 #define CIN std::cin
@@ -74,7 +75,7 @@ public:
         {
             uint8_t shift = (uint8_t) (6 - 2 * (i % 4));
  
-            switch (dna_str[i])
+            switch (toupper(dna_str[i]))
             {
                 case 'A':
                     m_data[i / 4] |= (uint8_t) (BASE_A << shift);
