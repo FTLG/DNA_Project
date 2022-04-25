@@ -24,8 +24,9 @@ void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS])
         badchar[(int) str[i]] = i;
 }
  
-void search(char *txt, char *pat)
+int search(char *txt, char *pat)
 {
+    int cnt = 0;
     int m = (int) strlen(pat);
     int n = (int) strlen(txt);
  
@@ -43,6 +44,7 @@ void search(char *txt, char *pat)
  
         if (j < 0)
         {
+            cnt++;
             printf("\n pattern occurs at shift = %d", s); // PATTERN? 
  
             s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
@@ -52,5 +54,6 @@ void search(char *txt, char *pat)
         else
             s += max(1, j - badchar[ (int) txt[s + j]]);
     }
+    return cnt;
 }
  
