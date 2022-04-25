@@ -16,18 +16,10 @@ void usage(int status) {
 
 int main( const int argc, const char* argv [] )
 {
-
-    // if (argc > 1) {
-    //     IFSTREAM DNA_infile ( argv[argc-1] );
-
-    //     read_from_file(DNA_infile);
-
-    // }
-
     int argind = 1;
     char *filename = (char *) "tests/ex1.txt"; // Set Default File Path
 
-     while (argind < argc && strlen(argv[argind]) > 1 && argv[argind][0] == '-') {
+    while (argind < argc && strlen(argv[argind]) > 1 && argv[argind][0] == '-') {
         char *arg = (char *) argv[argind++];
 
         switch (arg[1]){ // set flags
@@ -41,11 +33,19 @@ int main( const int argc, const char* argv [] )
                 usage(1);
                 break;
         }
-     }
+    }
 
-     IFSTREAM DNA_infile (filename); // save file data
+    
 
-     read_from_file(DNA_infile); 
+    IFSTREAM DNA_infile (filename); // save file data
+
+    read_from_file(DNA_infile); 
+
+    char choice = get_choice();
+
+    //if (choice == 'h') huntington_search() ..
+
+    
 
 
 }
