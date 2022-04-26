@@ -43,6 +43,7 @@ enum
 
 STRING read_from_file(IFSTREAM& DNA_infile);
 char get_choice();
+void get_pattern(char *pat);
 int max(int a, int b);
 void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
 int search(char *txt, char *pat);

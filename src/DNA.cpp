@@ -8,6 +8,15 @@
 
 #include "../include/DNA.h"
 
+
+void get_pattern(char *pat)
+{
+    COUT << "Enter Pattern: ";
+
+    CIN >> pat;
+
+}
+
 char get_choice()
 {
     COUT << ENDL << "What would you like to search for: " << ENDL 

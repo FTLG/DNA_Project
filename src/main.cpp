@@ -36,13 +36,15 @@ int main( const int argc, const char* argv [] )
 
     char choice = get_choice();
 
-	 //search(DNA_string, (char *) "TAC");
 
 	switch(choice) {
 		case 'h':
 			huntingtonSearch(DNA_string);
 			break;
 		case 'o':
+			char *pat;
+			get_pattern(pat);
+			COUT << "TESTING: " << pat << ENDL;
 			search(DNA_string, (char *) "TAC");
 			break;
 		default:
