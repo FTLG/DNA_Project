@@ -8,6 +8,15 @@
 
 #include "../include/DNA.h"
 
+
+void get_pattern(char *pat)
+{
+    COUT << "Enter Pattern: ";
+
+    CIN >> pat;
+
+}
+
 char get_choice()
 {
     COUT << ENDL << "What would you like to search for: " << ENDL 
@@ -73,7 +82,7 @@ int search(char *txt, char *pat)
         if (j < 0)
         {
             cnt++;
-            printf("\n pattern occurs at shift = %d", s); // PATTERN? 
+            printf("pattern occurs at index = %d\n", s); // PATTERN? 
  
             s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
  
@@ -83,4 +92,47 @@ int search(char *txt, char *pat)
             s += max(1, j - badchar[ (int) txt[s + j]]);
     }
     return cnt;
+}
+
+// PATTERN: CAG, COUNT >= 36
+void huntingtonSearch(char *txt)
+{
+	 char *pat = (char *) "CAG";
+	 int cnt = 0;
+	 int thres = 36;
+	 int m = (int) strlen(pat);
+	 int n = (int) strlen(txt);
+ 
+	 int badchar[NO_OF_CHARS];
+ 
+	 badCharHeuristic(pat, m, badchar);
+ 
+	 int s = 0; // s is shift of the pattern with respect to text
+	 while (s <= (n - m))
+	 {
+		  int j = m - 1;
+ 
+		  while (j >= 0 && pat[j] == txt[s + j])
+				j--;
+ 
+		  if (j < 0)
+		  {
+				cnt++;
+				printf("pattern occurs at index = %d\n", s); // PATTERN? 
+ 
+				s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
+ 
+		  }
+ 
+		  else
+				s += max(1, j - badchar[ (int) txt[s + j]]);
+	 }
+
+	if(cnt >= thres) {
+		printf("This person has Huntington's disease\n");
+	}
+	else {
+		printf("This person does not have Huntington's disease\n");
+	}
+
 }
