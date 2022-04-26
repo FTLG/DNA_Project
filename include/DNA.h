@@ -46,6 +46,7 @@ char get_choice();
 int max(int a, int b);
 void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
 int search(char *txt, char *pat);
+void huntingtonSearch(char *txt);
 
 class DNA_BS
 {
