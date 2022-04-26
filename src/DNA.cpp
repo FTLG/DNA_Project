@@ -9,11 +9,14 @@
 #include "../include/DNA.h"
 
 
-void get_pattern(char *pat)
+STRING get_pattern()
 {
+    STRING pat;
+   
     COUT << "Enter Pattern: ";
-
     CIN >> pat;
+
+    return pat;
 
 }
 
@@ -63,6 +66,9 @@ void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS])
  
 int search(char *txt, char *pat)
 {
+
+    COUT << "Search: " << pat << ENDL;
+
     int cnt = 0;
     int m = (int) strlen(pat);
     int n = (int) strlen(txt);
