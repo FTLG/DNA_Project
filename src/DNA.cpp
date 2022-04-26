@@ -22,7 +22,7 @@ STRING get_pattern()
 
 char get_choice()
 {
-    COUT << ENDL << "What would you like to search for: " << ENDL 
+    COUT << "What would you like to search for: " << ENDL 
     << "h: Huntington's Disease Gene" << ENDL
     << "o: Other motif" << ENDL;
 
@@ -64,7 +64,7 @@ void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS])
         badchar[(int) str[i]] = i;
 }
  
-int search(char *txt, char *pat)
+void search(char *txt, char *pat)
 {
 
     COUT << "Search: " << pat << ENDL;
@@ -97,7 +97,6 @@ int search(char *txt, char *pat)
         else
             s += max(1, j - badchar[ (int) txt[s + j]]);
     }
-    return cnt;
 }
 
 // PATTERN: CAG, COUNT >= 36
