@@ -35,8 +35,6 @@ int main( const int argc, const char* argv [] )
     char* DNA_string = strand.to_string();
 
     char choice = get_choice();
-    int x;
-
 
     STRING pat;
 
@@ -46,10 +44,7 @@ int main( const int argc, const char* argv [] )
 			break;
 		case 'o':
 		    pat = get_pattern();
-
-            COUT << pat << ENDL;
-
-			x = search(DNA_string, (char *) pat.c_str());
+			search(DNA_string, (char *) pat.c_str());
 			break;
 		default:
 			printf("Invalid choice\n");
