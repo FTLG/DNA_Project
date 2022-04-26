@@ -35,17 +35,21 @@ int main( const int argc, const char* argv [] )
     char* DNA_string = strand.to_string();
 
     char choice = get_choice();
+    int x;
 
+
+    STRING pat;
 
 	switch(choice) {
 		case 'h':
 			huntingtonSearch(DNA_string);
 			break;
 		case 'o':
-			char *pat;
-			get_pattern(pat);
-			COUT << "TESTING: " << pat << ENDL;
-			search(DNA_string, (char *) "TAC");
+		    pat = get_pattern();
+
+            COUT << pat << ENDL;
+
+			x = search(DNA_string, (char *) pat.c_str());
 			break;
 		default:
 			printf("Invalid choice\n");
