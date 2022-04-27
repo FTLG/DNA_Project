@@ -21,7 +21,7 @@ STRING get_pattern()
 }
 
 // A function that obtains the threshold of how many times the sequence can repeat
-int get_thres()
+int get_rep_thres()
 {
     int thres;
    
@@ -31,12 +31,26 @@ int get_thres()
     return thres;
 }
 
+
+// A function that obtains the threshold of how many times the sequence can repeat
+int get_tot_thres()
+{
+    int thres;
+   
+    COUT << "Enter the total number of times the pattern must appear for a disease to appear: ";
+    CIN >> thres;
+
+    return thres;
+}
+
+
 // A function that obtains the user's decision about which program to run
 char get_choice()
 {
     COUT << "What would you like to search for: " << ENDL 
     << "h: Huntington's Disease Gene" << ENDL
-    << "o: Other motif" << ENDL
+    << "r: Max times a given sequence is repeated" << ENDL
+	 << "t: Total times a given sequence is repeated" << ENDL
 	 << "Choice: ";
 
     char choice;
@@ -78,9 +92,9 @@ void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS])
         badchar[(int) str[i]] = i;
 }
 
-// A function that searches for when and where a given pattern repeats
+// A function that searches for the longest amount of times that a given pattern repeats
 // and displays whether or not that count exceeds a given threshold
-void search(char *txt, char *pat, int thres)
+void repeatSearch(char *txt, char *pat, int thres)
 {
 
     int cnt = 0;
@@ -133,8 +147,8 @@ void search(char *txt, char *pat, int thres)
 
 }
 
-// A function that searches for when and where the pattern CAG repeats
-// and displays whether or not that count repeats enough to cause Huntington's disease
+// A function that searches for the longest consecutive time that the pattern CAG repeats
+// and displays whether or not it repeats enough to cause Huntington's disease
 void huntingtonSearch(char *txt)
 {
 	 char *pat = (char *) "CAG"; // look for CAG pattern
@@ -188,3 +202,53 @@ void huntingtonSearch(char *txt)
 	}
 
 }
+
+
+// A function that searches for the total times that a given pattern repeats
+// and whether or not it exceeds a given threshold
+void totSearch(char *txt, char *pat, int thres)
+{
+
+    int cnt = 0;
+    int m = (int) strlen(pat);
+    int n = (int) strlen(txt);
+ 
+    int badchar[NO_OF_CHARS];
+ 
+    badCharHeuristic(pat, m, badchar);
+ 
+    int s = 0; // s is shift of the pattern with respect to text
+    while (s <= (n - m))
+    {
+        int j = m - 1;
+ 
+        while (j >= 0 && pat[j] == txt[s + j])
+            j--;
+ 
+        if (j < 0)
+        {
+            cnt++; // increase count if pattern is found
+            //printf("pattern occurs at index = %d\n", s);
+
+            s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
+ 
+        }
+ 
+        else {
+            s += max(1, j - badchar[ (int) txt[s + j]]);
+		  }
+    }
+
+	// display amount of times pattern is found
+	COUT << "\nThe pattern was found " << cnt << " times." << ENDL;
+
+	// display whether or not a disease is found
+	if(cnt >= thres) {
+		printf("This person has the entered disease.\n");
+	}
+	else {
+		printf("This person does not have the entered disease.\n");
+	}
+
+}
+
