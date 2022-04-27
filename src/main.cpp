@@ -46,11 +46,17 @@ int main( const int argc, const char* argv [] )
 		case 'h':
 			huntingtonSearch(DNA_string);
 			break;
-		// search for given disease
-		case 'o':
+		// search for max times a sequence is repeated
+		case 'r':
 		   pat = get_pattern();
-			thres = get_thres();
-			search(DNA_string, (char *) pat.c_str(), thres);
+			thres = get_rep_thres();
+			repeatSearch(DNA_string, (char *) pat.c_str(), thres);
+			break;
+		// search for total amount of times a sequence is repeated
+		case 't':
+			pat = get_pattern();
+			thres = get_tot_thres();
+			totSearch(DNA_string, (char *) pat.c_str(), thres);
 			break;
 		// verify correct input
 		default:
