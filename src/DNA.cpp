@@ -48,8 +48,9 @@ char get_choice()
     COUT << "What would you like to search for: " << ENDL 
     << "h: Huntington's Disease Gene" << ENDL
     << "r: Max times a given sequence is repeated" << ENDL
-	<< "t: Total times a given sequence is repeated" << ENDL
-	<< "Choice: ";
+	  << "t: Total times a given sequence is repeated" << ENDL
+	  << "Choice: ";
+
 
     char choice;
 
@@ -219,3 +220,50 @@ void totSearch(char *txt, char *pat, int thres, FILE* fp)
 	else fprintf(fp, "This person does not have the entered disease.\n");
 }
 
+// A function that searches for the total times that a given pattern repeats
+// and whether or not it exceeds a given threshold
+void totSearch(char *txt, char *pat, int thres)
+{
+
+    int cnt = 0;
+    int m = (int) strlen(pat);
+    int n = (int) strlen(txt);
+ 
+    int badchar[NO_OF_CHARS];
+ 
+    badCharHeuristic(pat, m, badchar);
+ 
+    int s = 0; // s is shift of the pattern with respect to text
+    while (s <= (n - m))
+    {
+        int j = m - 1;
+ 
+        while (j >= 0 && pat[j] == txt[s + j])
+            j--;
+ 
+        if (j < 0)
+        {
+            cnt++; // increase count if pattern is found
+            //printf("pattern occurs at index = %d\n", s);
+
+            s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
+ 
+        }
+ 
+        else {
+            s += max(1, j - badchar[ (int) txt[s + j]]);
+		  }
+    }
+
+	// display amount of times pattern is found
+	COUT << "\nThe pattern was found " << cnt << " times." << ENDL;
+
+	// display whether or not a disease is found
+	if(cnt >= thres) {
+		printf("This person has the entered disease.\n");
+	}
+	else {
+		printf("This person does not have the entered disease.\n");
+	}
+
+}

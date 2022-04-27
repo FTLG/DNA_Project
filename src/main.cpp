@@ -54,7 +54,7 @@ int main( const int argc, const char* argv [] )
 			break;
 		// search for max times a sequence is repeated
 		case 'r':
-		    pat = get_pattern();
+		  pat = get_pattern();
 			thres = get_rep_thres();
 			repeatSearch(DNA_string, (char *) pat.c_str(), thres, fp);
 			break;
