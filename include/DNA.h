@@ -44,10 +44,12 @@ enum
 STRING read_from_file(IFSTREAM& DNA_infile);
 char get_choice();
 STRING get_pattern();
-int get_thres();
+int get_rep_thres();
+int get_tot_thres();
 int max(int a, int b);
 void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
-void search(char *txt, char *pat, int thres);
+void totSearch(char *txt, char *pat, int thres);
+void repeatSearch(char *txt, char *pat, int thres);
 void huntingtonSearch(char *txt);
 
 class DNA_BS
