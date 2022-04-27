@@ -25,6 +25,8 @@
 #define COUT std::cout
 #define ENDL std::endl
 #define IFSTREAM std::ifstream
+#define OFSTREAM std::ofstream
+#define OSTREAM std::ostream
 #define STRING std::string
 #define BITSET std::bitset
 #define MEMSET std::memset
@@ -48,9 +50,9 @@ int get_rep_thres();
 int get_tot_thres();
 int max(int a, int b);
 void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
-void totSearch(char *txt, char *pat, int thres);
-void repeatSearch(char *txt, char *pat, int thres);
-void huntingtonSearch(char *txt);
+void totSearch(char *txt, char *pat, int thres, FILE* fp);
+void repeatSearch(char *txt, char *pat, int thres, FILE* fp);
+void huntingtonSearch(char *txt, FILE* fp);
 
 class DNA_BS
 {
