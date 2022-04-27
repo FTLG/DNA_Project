@@ -10,25 +10,31 @@
 
 // Function to display correct usage of the program
 void usage(int status) {
-    fprintf(stderr, "Usage: Enter file name as command line argument\n");
+    fprintf(stderr, "Usage: Enter input and output file names as command line argument\nExample: exe/./main tests/hunt.txt output.txt\n");
     exit(status);
 }
 
 int main( const int argc, const char* argv [] )
 {
-    const char *filename;
-
 	// verify that the user has entered the correct number of command line arguments
-	if(argc == 2) {
-		filename = argv[1];
+
+	IFSTREAM DNA_infile; 
+	OFSTREAM DNA_outfile;
+
+	FILE* fp = stdout;
+
+	if (argc > 1) {
+		DNA_infile.open(argv[1]);
+		if (argc == 3) {
+			fp = fopen(argv[2], "w");
+		}
 	}
+
 	// otherwise display usage and exit
 	else {
 		usage(1);
 		return 1;
 	}
-
-    IFSTREAM DNA_infile (filename); // save file data
 
     STRING dna = read_from_file(DNA_infile);
     const size_t size = dna.length();
@@ -39,30 +45,33 @@ int main( const int argc, const char* argv [] )
     char choice = get_choice(); // use function to get user's choice of program to run
 
     STRING pat;
-	 int thres;
+	int thres;
 
 	switch(choice) {
 		// search for huntington's
 		case 'h':
-			huntingtonSearch(DNA_string);
+			huntingtonSearch(DNA_string, fp);
 			break;
 		// search for max times a sequence is repeated
 		case 'r':
-		   pat = get_pattern();
+		    pat = get_pattern();
 			thres = get_rep_thres();
-			repeatSearch(DNA_string, (char *) pat.c_str(), thres);
+			repeatSearch(DNA_string, (char *) pat.c_str(), thres, fp);
 			break;
 		// search for total amount of times a sequence is repeated
 		case 't':
 			pat = get_pattern();
 			thres = get_tot_thres();
-			totSearch(DNA_string, (char *) pat.c_str(), thres);
+			totSearch(DNA_string, (char *) pat.c_str(), thres, fp);
 			break;
 		// verify correct input
 		default:
-			printf("Invalid choice\n");
+			fprintf(fp, "Invalid choice\n");
 			break;
 	}
+
+	fclose(fp);
+	delete [] DNA_string;
 
 	return 0;
 
