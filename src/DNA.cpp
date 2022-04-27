@@ -84,6 +84,7 @@ void search(char *txt, char *pat, int thres)
 {
 
     int cnt = 0;
+	 int maxCnt = 0;
     int m = (int) strlen(pat);
     int n = (int) strlen(txt);
  
@@ -102,21 +103,28 @@ void search(char *txt, char *pat, int thres)
         if (j < 0)
         {
             cnt++; // increase count if pattern is found
-            //printf("pattern occurs at index = %d\n", s); 
+            //printf("pattern occurs at index = %d\n", s);
+
+				// update maxCnt if needed 
+            if(cnt > maxCnt) {
+					maxCnt = cnt;
+				}
  
             s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
  
         }
  
-        else
+        else {
+				cnt = 0;	// reset count if sequence is is broken
             s += max(1, j - badchar[ (int) txt[s + j]]);
+		  }
     }
 
 	// display amount of times pattern is found
-	COUT << "\nThe pattern was found " << cnt << " times." << ENDL;
+	COUT << "\nThe pattern was found " << maxCnt << " consecutive times." << ENDL;
 
 	// display whether or not a disease is found
-	if(cnt > thres) {
+	if(maxCnt > thres) {
 		printf("This person has the entered disease.\n");
 	}
 	else {
@@ -131,6 +139,7 @@ void huntingtonSearch(char *txt)
 {
 	 char *pat = (char *) "CAG"; // look for CAG pattern
 	 int cnt = 0;
+	 int maxCnt = 0;
 	 int thres = 36;	// set threshold to 36
 	 int m = (int) strlen(pat);
 	 int n = (int) strlen(txt);
@@ -151,20 +160,27 @@ void huntingtonSearch(char *txt)
 		  {
 				cnt++; // increase count if pattern is found
 				//printf("pattern occurs at index = %d\n", s); 
+				
+				// update maxCnt if needed
+				if(cnt > maxCnt) {
+					maxCnt = cnt;
+				}
  
 				s += (s + m < n) ? m - badchar[ (int) txt[s + m]] : 1;
  
 		  }
  
-		  else
+		  else {
+				cnt = 0;	// reset count if sequence is broken
 				s += max(1, j - badchar[ (int) txt[s + j]]);
+			}
 	 }
 
 	// display amount of times pattern is found
-	COUT << "\nThe pattern was found " << cnt << " times." << ENDL;
+	COUT << "\nThe pattern was found " << maxCnt << " consecutive times." << ENDL;
 
 	// display whether or not a disease is found
-	if(cnt >= thres) {
+	if(maxCnt >= thres) {
 		printf("This person has Huntington's disease.\n");
 	}
 	else {
