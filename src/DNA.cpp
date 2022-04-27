@@ -25,7 +25,7 @@ int get_thres()
 {
     int thres;
    
-    COUT << "Enter maximum amount of times pattern can appear until it produces a disease: ";
+    COUT << "Enter the number of times the pattern must appear consecutively for a disease to appear: ";
     CIN >> thres;
 
     return thres;
@@ -124,7 +124,7 @@ void search(char *txt, char *pat, int thres)
 	COUT << "\nThe pattern was found " << maxCnt << " consecutive times." << ENDL;
 
 	// display whether or not a disease is found
-	if(maxCnt > thres) {
+	if(maxCnt >= thres) {
 		printf("This person has the entered disease.\n");
 	}
 	else {
