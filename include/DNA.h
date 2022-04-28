@@ -16,17 +16,23 @@
 #include <fstream>
 #include <cstring> 
 #include <stdexcept>
+#include <limits.h>
+#include <string.h>
+#include <ctype.h>
 
 #define VECTOR std::vector
 #define CIN std::cin
 #define COUT std::cout
 #define ENDL std::endl
 #define IFSTREAM std::ifstream
+#define OFSTREAM std::ofstream
+#define OSTREAM std::ostream
 #define STRING std::string
 #define BITSET std::bitset
 #define MEMSET std::memset
 
 #define BASE_MASK 0x3 /* binary: 11 */
+# define NO_OF_CHARS 256
 
 enum
 {
@@ -37,18 +43,30 @@ enum
 };
 
 
-void read_from_file(IFSTREAM& DNA_infile);
+STRING read_from_file(IFSTREAM& DNA_infile);
 char get_choice();
+STRING get_pattern();
+int get_rep_thres();
+int get_tot_thres();
+int max(int a, int b);
+void badCharHeuristic(char *str, int size, int badchar[NO_OF_CHARS]);
+void totSearch(char *txt, char *pat, int thres, FILE* fp);
+void repeatSearch(char *txt, char *pat, int thres, FILE* fp);
+void huntingtonSearch(char *txt, FILE* fp);
 
-class DNA_MS
+class DNA_BS
 {
 public:
+
+    // Default Constructor
+    DNA_BS(): m_data(), m_len() {}
+
     /**
      * @brief Constructs a compressed representation of a DNA sequence.
      * @param dna_str A string holding a DNA sequence (e.g. "ATGCACG").
      * @param dna_len The length of the DNA sequence.
      */
-    DNA_MS(STRING dna_str, const size_t dna_len)
+    DNA_BS(STRING dna_str, const size_t dna_len)
     {
         m_len = dna_len;
  
@@ -64,7 +82,7 @@ public:
         {
             uint8_t shift = (uint8_t) (6 - 2 * (i % 4));
  
-            switch (dna_str[i])
+            switch (toupper(dna_str[i]))
             {
                 case 'A':
                     m_data[i / 4] |= (uint8_t) (BASE_A << shift);
@@ -94,9 +112,10 @@ public:
     /**
      * @brief Destructor.
      */
-    ~DNA_MS()
+    ~DNA_BS()
     {
         delete[] m_data;
+        
     }
  
     /**
@@ -105,7 +124,7 @@ public:
     char* to_string() const
     {
         char* dna_str = new char[m_len + 1];
- 
+
         /* for each base of the DNA sequence */
         for (size_t i = 0; i < m_len; ++i)
         {

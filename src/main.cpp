@@ -8,44 +8,71 @@
 
 #include "../include/DNA.h"
 
+// Function to display correct usage of the program
 void usage(int status) {
-    fprintf(stderr, "Usage:\n");
-    fprintf(stderr, "    -f File to read bases from\n");
+    fprintf(stderr, "Usage: Enter input and output file names as command line argument\nExample: exe/./main tests/hunt.txt output.txt\n");
     exit(status);
 }
 
 int main( const int argc, const char* argv [] )
 {
-    int argind = 1;
-    char *filename = (char *) "tests/ex1.txt"; // Set Default File Path
+	// verify that the user has entered the correct number of command line arguments
 
-    while (argind < argc && strlen(argv[argind]) > 1 && argv[argind][0] == '-') {
-        char *arg = (char *) argv[argind++];
+	IFSTREAM DNA_infile; 
+	OFSTREAM DNA_outfile;
 
-        switch (arg[1]){ // set flags
-            case 'h':
-                usage(0);
-                break;
-            case 'f':
-                filename = (char *) (argv[argind]); // save filename
-                break;
-            default:
-                usage(1);
-                break;
-        }
-    }
+	FILE* fp = stdout;
 
-    
+	if (argc > 1) {
+		DNA_infile.open(argv[1]);
+		if (argc == 3) {
+			fp = fopen(argv[2], "w");
+		}
+	}
 
-    IFSTREAM DNA_infile (filename); // save file data
+	// otherwise display usage and exit
+	else {
+		usage(1);
+		return 1;
+	}
 
-    read_from_file(DNA_infile); 
+    STRING dna = read_from_file(DNA_infile);
+    const size_t size = dna.length();
 
-    char choice = get_choice();
+    DNA_BS strand(dna, size);
+    char* DNA_string = strand.to_string();
 
-    //if (choice == 'h') huntington_search() ..
+    char choice = get_choice(); // use function to get user's choice of program to run
 
-    
+    STRING pat;
+	int thres;
 
+	switch(choice) {
+		// search for huntington's
+		case 'h':
+			huntingtonSearch(DNA_string, fp);
+			break;
+		// search for max times a sequence is repeated
+		case 'r':
+		  pat = get_pattern();
+			thres = get_rep_thres();
+			repeatSearch(DNA_string, (char *) pat.c_str(), thres, fp);
+			break;
+		// search for total amount of times a sequence is repeated
+		case 't':
+			pat = get_pattern();
+			thres = get_tot_thres();
+			totSearch(DNA_string, (char *) pat.c_str(), thres, fp);
+			break;
+		// verify correct input
+		default:
+			fprintf(fp, "Invalid choice\n");
+			break;
+	}
+
+	fclose(fp);
+	delete [] DNA_string;
+
+	return 0;
 
 }
