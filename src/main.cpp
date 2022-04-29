@@ -23,7 +23,7 @@ int main( const int argc, const char* argv [] )
 
 	FILE* fp = stdout;
 
-	if (argc > 1) {
+	if (argc == 2 || argc == 3) {
 		DNA_infile.open(argv[1]);
 		if (argc == 3) {
 			fp = fopen(argv[2], "w");
