@@ -116,7 +116,9 @@ Checkpoint 2 Code Review and Memorandum – Due April 22
 April 22: Team code and memo check-in
 April 26: Finalize project
 Final Submission – Due April 26
+
+=======
+
  
- 
-Works Cited:
-Boyer Moore Algorithm: https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/
+ Works Cited:
+ Boyer Moore Algorithm - https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/
